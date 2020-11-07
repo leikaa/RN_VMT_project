@@ -3,7 +3,8 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity, Dimensions,
+  TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import {useNavigation} from 'react-navigation-hooks';
 
@@ -23,11 +24,10 @@ const AuthorizationScreen = () => {
   const onSubmitHandler = () => {
     setIsLoading(true);
 
-    console.log('data sent');
     setTimeout(() => {
       setIsLoading(false);
       navigate('Authorized');
-    }, 1500)
+    }, 1500);
   };
 
   return (
@@ -75,25 +75,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',
-    position: 'relative'
+    position: 'relative',
   },
   sign_up_btn: {
     alignSelf: 'flex-end',
     marginTop: 10,
-    marginRight: 15
+    marginRight: 15,
   },
   sign_up_btn_text: {
     color: THEME.MAIN_COLOR,
-    fontWeight: '700'
+    fontWeight: '700',
   },
   sign_in_btn_container: {
     flexDirection: 'row',
     position: 'absolute',
-    bottom: 30
+    bottom: 30,
   },
   sign_in_btn: {
-    width: window.width - 40
-  }
+    width: window.width - 40,
+  },
 });
 
 export default AuthorizationScreen;

@@ -15,6 +15,7 @@ const AuthLayer = createStackNavigator({
     Register: {
       screen: RegistrationScreen,
       navigationOptions: () => ({
+        headerTitle: 'Sign up',
         headerBackTitle: null,
       }),
     },
