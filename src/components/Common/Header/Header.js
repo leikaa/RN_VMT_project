@@ -31,7 +31,7 @@ const Header = ({title}) => {
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 54,
+    minHeight: 56,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: THEME.MAIN_COLOR,

@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
+  SafeAreaView,
 } from 'react-native';
 import {useNavigation} from 'react-navigation-hooks';
 
@@ -31,7 +32,7 @@ const AuthorizationScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View>
         <InputField
           placeholder={'Email'}
@@ -65,7 +66,7 @@ const AuthorizationScreen = () => {
           style={styles.sign_in_btn}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

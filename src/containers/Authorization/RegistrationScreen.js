@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Dimensions,
   ScrollView,
+  SafeAreaView,
 } from 'react-native';
 
 import TextInput from '../../components/Common/CommonTextInput';
@@ -51,7 +52,7 @@ const RegistrationScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <ScrollView>
         <TextInput
           title={'Name'}
@@ -78,6 +79,7 @@ const RegistrationScreen = () => {
           value={password}
           isError={isPasswordNotEmpty}
           setIsError={setIsPasswordNotEmpty}
+          isMasked
         />
         {
           password.length > 0 &&
@@ -88,6 +90,7 @@ const RegistrationScreen = () => {
             value={repeatedPassword}
             isError={isPasswordNotTheSame}
             setIsError={setIsPasswordNotTheSame}
+            isMasked
           />
         }
       </ScrollView>
@@ -99,7 +102,7 @@ const RegistrationScreen = () => {
           style={styles.submit_btn}
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

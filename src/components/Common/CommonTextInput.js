@@ -8,7 +8,7 @@ import {
 
 import {THEME} from '../../theme';
 
-const CommonTextInput = ({title, message, onChangeValue, value, isError = false, setIsError, keyboardType = 'default', placeholder}) => {
+const CommonTextInput = ({title, message, onChangeValue, value, isError = false, setIsError, keyboardType = 'default', placeholder, isMasked = false}) => {
   const focusOnElement = useRef(null);
 
   return (
@@ -33,6 +33,7 @@ const CommonTextInput = ({title, message, onChangeValue, value, isError = false,
         placeholderTextColor={THEME.DISABLED_COLOR}
         placeholder={placeholder}
         autoCorrect={false}
+        secureTextEntry={isMasked}
       />
       {
         isError &&

@@ -76,8 +76,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginVertical: 10,
     color: '#000',
-    borderColor: THEME.DISABLED_COLOR,
     borderWidth: 1,
+    borderColor: THEME.DISABLED_COLOR,
   },
 });
 
