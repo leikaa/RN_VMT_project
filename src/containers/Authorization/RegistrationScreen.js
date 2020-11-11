@@ -57,7 +57,7 @@ const RegistrationScreen = () => {
         <TextInput
           title={'Name'}
           message={'Invalid name or format'}
-          placeholder={'FirstName LastName'}
+          placeholder={'Name Surname'}
           onChangeValue={setName}
           value={name}
           isError={isNameNotValid}

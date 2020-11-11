@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import {useNavigation} from 'react-navigation-hooks';
 
-import ProfileItem from '../components/ProfileScreen/ProfileItem';
+import ProfileItem from '../components/Common/ProfileItem';
 import SubmitButton from '../components/Common/CommonButton';
 
 const window = Dimensions.get('window');
@@ -18,7 +18,7 @@ const ProfileScreen = () => {
   const name = 'John Smith';
 
   const onSubmitHandler = () => {
-    //clear data
+    //todo clear data
     navigate('Login');
   };
 

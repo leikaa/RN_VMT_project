@@ -8,11 +8,11 @@ import {
 
 import {THEME} from '../../theme';
 
-const CommonTextInput = ({title, message, onChangeValue, value, isError = false, setIsError, keyboardType = 'default', placeholder, isMasked = false}) => {
+const CommonTextInput = ({style, title, message, onChangeValue, value, isError = false, setIsError, keyboardType = 'default', placeholder, isMasked = false}) => {
   const focusOnElement = useRef(null);
 
   return (
-    <View style={styles.input_container}>
+    <View style={[styles.input_container, style]}>
       <Text
         style={[styles.input_title, isError && {color: THEME.WARNING_COLOR}]}
         onPress={() => focusOnElement.current.focus()}
@@ -45,8 +45,9 @@ const CommonTextInput = ({title, message, onChangeValue, value, isError = false,
 
 const styles = StyleSheet.create({
   input_container: {
-    marginTop: 20,
+    marginVertical: 15,
     marginHorizontal: 20,
+    position: 'relative',
   },
   input_title: {
     fontSize: 12,
@@ -69,6 +70,8 @@ const styles = StyleSheet.create({
     paddingTop: 0,
   },
   warning_message: {
+    position: 'absolute',
+    top: 56,
     fontSize: 12,
     color: THEME.WARNING_COLOR,
     fontWeight: '300',
