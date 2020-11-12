@@ -21,3 +21,12 @@ export const mockUsersList = [
   {id: 20, name: 'John Doe20'},
   {id: 21, name: 'Mike Doe21'},
 ];
+
+export const mockTransactionsList = [
+  {id: 1, date: '10.11.2019', username: 'User One', amount: 500, balance: 1000},
+  {id: 2, date: '11.11.2019', username: 'User Two', amount: 1500, balance: 2000},
+  {id: 3, date: '12.11.2019', username: 'User Three', amount: 500, balance: 1000},
+  {id: 4, date: '13.11.2019', username: 'User One', amount: 500, balance: 1000},
+  {id: 5, date: '14.11.2019', username: 'User One', amount: 1500, balance: 2000},
+  {id: 6, date: '15.11.2019', username: 'User One', amount: 500, balance: 1000},
+];

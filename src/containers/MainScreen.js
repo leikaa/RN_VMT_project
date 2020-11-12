@@ -17,7 +17,7 @@ import CustomTextInput from '../components/Common/CommonTextInput';
 import SubmitButton from '../components/Common/CommonButton';
 import {isNameValid} from '../helpers/isNameValid';
 import {getCorrectAmount} from '../helpers/getCorrectAmount';
-import {mockUsersList} from '../mockUsersList';
+import {mockUsersList} from '../mock';
 
 const window = Dimensions.get('window');
 
