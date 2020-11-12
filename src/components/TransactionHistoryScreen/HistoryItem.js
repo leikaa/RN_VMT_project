@@ -1,21 +1,22 @@
-import {Dimensions, ImageBackground, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import historyBackground from '../../assets/historyBackground.png';
 import React from 'react';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
-const onItemClickHandler = () => {
-  console.log('history item clicked');
-};
+const HistoryItem = ({item}) => {
+  const onItemClickHandler = () => {
+    console.log('history item clicked', item.id);
+  };
 
-const window = Dimensions.get('window');
-
-const HistoryItem = ({item}) => (
-  <TouchableOpacity
-    onPress={onItemClickHandler}
-    activeOpacity={1}
-  >
-    <ImageBackground
-      source={historyBackground}
-      style={styles.history_container}>
+  return (
+    <TouchableOpacity
+      onPress={onItemClickHandler}
+      activeOpacity={1}
+      style={styles.history_container}
+    >
       <View style={styles.history_header_section}>
         <View style={styles.history_header_item}>
           <Text style={styles.history_header_text}>{item.date}</Text>
@@ -37,29 +38,17 @@ const HistoryItem = ({item}) => (
         <Text style={styles.history_header_text}>Resulting balance</Text>
         <Text style={[styles.history_header_text]}>{item.balance}</Text>
       </View>
-    </ImageBackground>
-  </TouchableOpacity>
-);
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  content_container: {
-    flex: 1,
-    backgroundColor: '#f2f2f2',
-  },
-  items_list: {
-    backgroundColor: '#f2f2f2',
-    width: window.width - 36,
-    alignSelf: 'center',
-    marginTop: 5,
-  },
   history_container: {
     minHeight: 192,
-    borderWidth: 2,
+    borderBottomWidth: 10,
     borderColor: '#f2f2f2',
+    backgroundColor: '#fff',
+    marginTop: 10,
   },
   history_header_section: {
     borderBottomWidth: 1,

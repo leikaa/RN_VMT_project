@@ -60,9 +60,8 @@ const styles = StyleSheet.create({
   },
   items_list: {
     backgroundColor: '#f2f2f2',
-    width: window.width - 36,
+    width: window.width - 40,
     alignSelf: 'center',
-    marginTop: 5,
   },
   no_history: {
     flex: 1,
