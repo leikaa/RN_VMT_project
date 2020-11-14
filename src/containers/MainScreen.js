@@ -20,24 +20,20 @@ import {isNameValid} from '../helpers/isNameValid';
 import {getCorrectAmount} from '../helpers/getCorrectAmount';
 import {createTransaction} from '../store/actions/main';
 
-import {mockUsersList} from '../mock';
-
 const window = Dimensions.get('window');
 
 const MainScreen = () => {
+  const token = useSelector(state => state.Authorization.token);
+  const filteredUsersList = useSelector(state => state.Main.usersList);
+  const balance = useSelector(state => state.Profile.balance);
+
   const dispatch = useDispatch();
   const [userToFind, setUserToFind] = useState('');
-  const [usersList, setUsersList] = useState(mockUsersList);
   const [userListVisibility, setUserListVisibility] = useState(false);
   const [amountToTransfer, setAmountToTransfer] = useState('');
   const [isAmountToTransferNotValid, setIsAmountToTransferNotValid] = useState(false);
   const [isNameNotValid, setIsNameNotValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  const token = useSelector(state => state.Authorization.token);
-
-  // seems api already filters initial user list
-  const [filteredUserData, setFilteredUserData] = useState('');
 
   const onListItemClickHandler = (user) => {
     Keyboard.dismiss();
@@ -46,20 +42,23 @@ const MainScreen = () => {
   };
 
   const onSubmitHandler = () => {
+    let error = false;
+
     if (!isNameValid(userToFind)) {
-      // setIsNameNotValid(true);
+      setIsNameNotValid(true);
+      error = true;
     }
 
-    if (+amountToTransfer <= 0) {
+    if (+amountToTransfer <= 0 || +balance < +amountToTransfer) {
+      error = true;
       setIsAmountToTransferNotValid(true);
     }
-    //todo get total amount and check if it's less than amount to transfer
 
-    if (isAmountToTransferNotValid || isNameNotValid) {
-      return; // add error
+    if (error) {
+      return false;
     }
-    setIsLoading(true);
 
+    setIsLoading(true);
     dispatch(createTransaction(token, userToFind, amountToTransfer, setIsLoading));
   };
 
@@ -76,21 +75,19 @@ const MainScreen = () => {
           userToFind={userToFind}
           setUserToFind={setUserToFind}
           setUserListVisibility={setUserListVisibility}
-          usersList={usersList}
-          setFilteredUserData={setFilteredUserData}
           isError={isNameNotValid}
           setIsNameNotValid={setIsNameNotValid}
           message={'Invalid name or format'}
         />
         {
-          userListVisibility && filteredUserData.length > 0 ?
+          userListVisibility && filteredUsersList.length > 0 ?
             <ScrollView
               style={styles.items_list_wrapper}
               nestedScrollEnabled
               keyboardShouldPersistTaps={'handled'}
             >
               {
-                filteredUserData.map(item => (
+                filteredUsersList.map(item => (
                   <TouchableWithoutFeedback
                     onPress={() => onListItemClickHandler(item)}
                     key={item.id.toString()}
@@ -141,7 +138,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 86,
     zIndex: 10,
-    height: 90,
+    minHeight: 42,
+    maxHeight: 90,
     borderColor: '#f1f1f1',
     borderWidth: 1,
     width: window.width - 40,

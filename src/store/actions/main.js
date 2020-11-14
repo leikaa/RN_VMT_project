@@ -3,12 +3,9 @@ import qs from 'qs';
 
 import Strings from '../../utils/strings';
 import ErrorsHandler from '../../helpers/ErrorsHandler';
-import {UPDATE_USER_BALANCE} from './const';
+import {UPDATE_USER_BALANCE, SET_USERS_LIST} from './const';
 
 export const getFilteredUsersList = (token, setIsListVisible, filter) => {
-  console.log('token: ', token);
-  console.log('filter string: ', filter);
-
   const params = {
     filter,
   };
@@ -25,16 +22,14 @@ export const getFilteredUsersList = (token, setIsListVisible, filter) => {
     })
       .then(response => {
         if (response.status >= 200 && response.status < 300) {
-
-          console.log('users list', response.data);
-          //add dispatch
+          dispatch({type: SET_USERS_LIST, usersList: response.data});
+          setIsListVisible(true);
         }
-        setIsListVisible(true);
       })
       .catch(error => {
-        console.log('get user filtered list error', error);
+        console.log('get users filtered list error', error);
 
-        ErrorsHandler(error, Strings.users_filtered_list_error); //add new error
+        ErrorsHandler(error, Strings.users_filtered_list_error);
       })
   );
 };

@@ -7,7 +7,7 @@ import {getFilteredUsersList} from '../../store/actions/main';
 
 const window = Dimensions.get('window');
 
-const SearchTextInput = ({userToFind, setUserToFind, setUserListVisibility, usersList, setFilteredUserData, isError, message, setIsNameNotValid}) => {
+const SearchTextInput = ({userToFind, setUserToFind, setUserListVisibility, isError, message, setIsNameNotValid}) => {
   const dispatch = useDispatch();
   const token = useSelector(state => state.Authorization.token);
   const focusOnElement = useRef(null);
@@ -30,20 +30,8 @@ const SearchTextInput = ({userToFind, setUserToFind, setUserListVisibility, user
       setUserListVisibility(false);
     } else {
       setUserToFind(text);
-      // searchUserFilter(text);
-      // setUserListVisibility(true);
-
-      // userEntrySearchHandler(token, setUserListVisibility, text);
+      userEntrySearchHandler(token, setUserListVisibility, text);
     }
-  };
-
-  const searchUserFilter = text => {
-    const newData = usersList.filter(item => {
-      const userInitialData = `${item.name.toUpperCase()}`;
-      const userCurrentData = text.toUpperCase();
-      return userInitialData.indexOf(userCurrentData) === 0;
-    });
-    setFilteredUserData(newData);
   };
 
   return (
