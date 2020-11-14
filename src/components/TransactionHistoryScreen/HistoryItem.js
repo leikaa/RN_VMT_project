@@ -6,9 +6,20 @@ import {
   View,
 } from 'react-native';
 
+import {THEME} from '../../theme';
+
 const HistoryItem = ({item}) => {
   const onItemClickHandler = () => {
     console.log('history item clicked', item.id);
+  };
+
+  const isCreditTransaction = (transactionAmount) => {
+    let isCreditTransaction = true;
+    if (Math.sign(+transactionAmount) === -1) {
+      isCreditTransaction = false;
+    }
+
+    return isCreditTransaction;
   };
 
   return (
@@ -31,7 +42,10 @@ const HistoryItem = ({item}) => {
       <View style={styles.history_content_section}>
         <View style={styles.history_content_amount}>
           <Text style={styles.history_content_amount_title}>Transaction amount</Text>
-          <Text style={styles.history_content_amount_text}>{item.amount}</Text>
+          <Text
+            style={[styles.history_content_amount_text, isCreditTransaction(item.amount) ? {color: THEME.SUCCESS_COLOR} : {color: THEME.WARNING_COLOR}]}>
+            {item.amount}
+          </Text>
         </View>
       </View>
       <View style={styles.history_total_section}>

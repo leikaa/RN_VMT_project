@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -7,44 +7,60 @@ import {
   FlatList,
   Dimensions,
 } from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
 
 import Header from '../components/Common/Header/Header';
 import HistoryItem from '../components/TransactionHistoryScreen/HistoryItem';
-import {mockTransactionsList} from '../mock';
+import Preloader from '../components/Common/Preloader';
+import {getTransactionsHistory} from '../store/actions/history';
 
 const window = Dimensions.get('window');
 
 const TransactionsHistoryScreen = () => {
-  const userTransactionHistory = mockTransactionsList;
+  const userTransactionHistory = useSelector(state => state.History.transactionsHistory);
+  const token = useSelector(state => state.Authorization.token);
+  const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    dispatch(getTransactionsHistory(token, setIsLoading));
+  }, [userTransactionHistory]);
 
   return (
     <SafeAreaView style={styles.container}>
       <Header
         title={'History'}
       />
-      <View style={styles.content_container}>
-        {
-          userTransactionHistory.length > 0 ?
-            <FlatList
-              data={userTransactionHistory}
-              style={styles.items_list}
-              showsVerticalScrollIndicator={false}
-              renderItem={({item}) => (
-                <HistoryItem item={item}/>
-              )}
-              keyExtractor={item => item.id.toString()}
+      {
+        isLoading &&
+        <Preloader/>
+      }
+      {
+        !isLoading &&
+        <View style={styles.content_container}>
+          {
+            userTransactionHistory.length > 0 ?
+              <FlatList
+                data={userTransactionHistory}
+                style={styles.items_list}
+                showsVerticalScrollIndicator={false}
+                renderItem={({item}) => (
+                  <HistoryItem item={item}/>
+                )}
+                keyExtractor={item => item.id.toString()}
 
-              initialNumToRender={10}
-              updateCellsBatchingPeriod={50}
-              maxToRenderPerBatch={10}
-              windowSize={16}
-            />
-            :
-            <View style={styles.no_history}>
-              <Text>You dont have any transactions</Text>
-            </View>
-        }
-      </View>
+                initialNumToRender={10}
+                updateCellsBatchingPeriod={50}
+                maxToRenderPerBatch={10}
+                windowSize={16}
+              />
+              :
+              <View style={styles.no_history}>
+                <Text>You dont have any transactions</Text>
+              </View>
+          }
+        </View>
+      }
     </SafeAreaView>
   );
 };
