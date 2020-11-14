@@ -7,6 +7,7 @@ import {
   Dimensions,
 } from 'react-native';
 import {useNavigation} from 'react-navigation-hooks';
+import {useSelector} from 'react-redux';
 
 import {THEME} from '../../../theme';
 import UserAccountIcon from '../Icons/UserProfileIcon';
@@ -16,8 +17,8 @@ const window = Dimensions.get('window');
 
 const Header = ({title}) => {
   const {navigate} = useNavigation();
-  const name = 'John Doe';
-  const accountBalance = '500';
+  const name = useSelector(state => state.Profile.username);
+  const accountBalance = useSelector(state => state.Profile.balance);
 
   return (
     <View style={styles.wrapper}>

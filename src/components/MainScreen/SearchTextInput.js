@@ -1,11 +1,24 @@
 import React, {useRef} from 'react';
 import {Text, TextInput, View, StyleSheet, Dimensions} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+
 import {THEME} from '../../theme';
+import {getFilteredUsersList} from '../../store/actions/main';
 
 const window = Dimensions.get('window');
 
 const SearchTextInput = ({userToFind, setUserToFind, setUserListVisibility, usersList, setFilteredUserData, isError, message, setIsNameNotValid}) => {
+  const dispatch = useDispatch();
+  const token = useSelector(state => state.Authorization.token);
   const focusOnElement = useRef(null);
+  let userEntrySearchHandlerTimer;
+
+  const userEntrySearchHandler = (token, setIsListVisible, userToFindName) => {
+    clearTimeout(userEntrySearchHandlerTimer);
+    userEntrySearchHandlerTimer = setTimeout(() => (
+      dispatch(getFilteredUsersList(token, setIsListVisible, userToFindName))
+    ), 300);
+  };
 
   const changeTextHandler = (text) => {
     if (isError) {
@@ -17,8 +30,10 @@ const SearchTextInput = ({userToFind, setUserToFind, setUserListVisibility, user
       setUserListVisibility(false);
     } else {
       setUserToFind(text);
-      searchUserFilter(text);
-      setUserListVisibility(true);
+      // searchUserFilter(text);
+      // setUserListVisibility(true);
+
+      // userEntrySearchHandler(token, setUserListVisibility, text);
     }
   };
 
