@@ -1,5 +1,7 @@
 {
   "base_url": "http://193.124.114.46:3001/",
   "server_not_available": "Server connection error, please try again later.",
-  "user_registration_error": "An error occurred during user registration."
+  "user_registration_error": "An error occurred during user registration.",
+  "user_authorization_error": "An error occurred during user authorization.",
+  "user_get_info_error": "An error occurred when requesting user information."
 }

@@ -8,15 +8,18 @@ import {
   SafeAreaView,
 } from 'react-native';
 import {useNavigation} from 'react-navigation-hooks';
+import {useDispatch} from 'react-redux';
 
 import {THEME} from '../../theme';
 import InputField from '../../components/AuthorizationScreen/InputField/AuthInputField';
 import SubmitButton from '../../components/Common/CommonButton';
+import {authorizeUser} from '../../store/actions/authorization';
 
 const window = Dimensions.get('window');
 
 const AuthorizationScreen = () => {
   const {navigate} = useNavigation();
+  const dispatch = useDispatch();
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [isMasked, setIsMasked] = useState(false);
@@ -24,11 +27,7 @@ const AuthorizationScreen = () => {
 
   const onSubmitHandler = () => {
     setIsLoading(true);
-
-    setTimeout(() => {
-      setIsLoading(false);
-      navigate('Authorized');
-    }, 1500);
+    dispatch(authorizeUser(login, password, navigate, setIsLoading));
   };
 
   return (

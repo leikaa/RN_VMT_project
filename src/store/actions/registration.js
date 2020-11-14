@@ -2,8 +2,7 @@ import axios from 'axios';
 
 import Strings from '../../utils/strings';
 import ErrorsHandler from '../../helpers/ErrorsHandler';
-
-export const SET_USER_DATA = 'SET_USER_DATA';
+import {SET_USER_DATA} from './const';
 
 export const registerUser = (username, password, email, navigate, setIsLoading) => (
   dispatch => axios({
@@ -17,13 +16,11 @@ export const registerUser = (username, password, email, navigate, setIsLoading) 
     },
   })
     .then(response => {
+      setIsLoading(false);
       if (response.status >= 200 && response.status < 300) {
-        console.log('response', response);
-
-        dispatch({type: SET_USER_DATA, username, email});
+        dispatch({type: SET_USER_DATA, username, email, balance: 500});
         navigate('Authorized');
       }
-      setIsLoading(false);
     })
     .catch(error => {
       console.log('user registration error', error);

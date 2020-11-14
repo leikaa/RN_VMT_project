@@ -11,7 +11,7 @@ export function Profile(state = initialState, payload) {
         ...state,
         username: payload.username,
         email: payload.email,
-        balance: 500,
+        balance: payload.balance,
       };
     default:
       return state;
