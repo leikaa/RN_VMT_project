@@ -1,5 +1,7 @@
 export const initialState = {
   usersList: [],
+  paymentRecipient: '',
+  amountToTransfer: '',
 };
 
 export function Main(state = initialState, payload) {
@@ -8,6 +10,12 @@ export function Main(state = initialState, payload) {
       return {
         ...state,
         usersList: payload.usersList,
+      };
+    case 'SET_INITIAL_TRANSACTION_DATA':
+      return {
+        ...state,
+        paymentRecipient: payload.paymentRecipient,
+        amountToTransfer: payload.amountToTransfer,
       };
     default:
       return state;

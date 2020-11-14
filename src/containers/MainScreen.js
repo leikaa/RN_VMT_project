@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -18,7 +18,7 @@ import CustomTextInput from '../components/Common/CommonTextInput';
 import SubmitButton from '../components/Common/CommonButton';
 import {isNameValid} from '../helpers/isNameValid';
 import {getCorrectAmount} from '../helpers/getCorrectAmount';
-import {createTransaction} from '../store/actions/main';
+import {createTransaction, updateInitialTransactionData} from '../store/actions/main';
 
 const window = Dimensions.get('window');
 
@@ -26,14 +26,21 @@ const MainScreen = () => {
   const token = useSelector(state => state.Authorization.token);
   const filteredUsersList = useSelector(state => state.Main.usersList);
   const balance = useSelector(state => state.Profile.balance);
+  const initialPaymentRecipient = useSelector(state => state.Main.paymentRecipient);
+  const initialAmountToTransfer = useSelector(state => state.Main.amountToTransfer);
 
   const dispatch = useDispatch();
-  const [userToFind, setUserToFind] = useState('');
+  const [userToFind, setUserToFind] = useState(initialPaymentRecipient);
   const [userListVisibility, setUserListVisibility] = useState(false);
-  const [amountToTransfer, setAmountToTransfer] = useState('');
+  const [amountToTransfer, setAmountToTransfer] = useState(initialAmountToTransfer);
   const [isAmountToTransferNotValid, setIsAmountToTransferNotValid] = useState(false);
   const [isNameNotValid, setIsNameNotValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setUserToFind(initialPaymentRecipient);
+    setAmountToTransfer(initialAmountToTransfer);
+  }, [initialPaymentRecipient, initialAmountToTransfer]);
 
   const onListItemClickHandler = (user) => {
     Keyboard.dismiss();
@@ -60,6 +67,7 @@ const MainScreen = () => {
 
     setIsLoading(true);
     dispatch(createTransaction(token, userToFind, amountToTransfer, setIsLoading));
+    dispatch(updateInitialTransactionData('', ''));
   };
 
   return (

@@ -3,7 +3,11 @@ import qs from 'qs';
 
 import Strings from '../../utils/strings';
 import ErrorsHandler from '../../helpers/ErrorsHandler';
-import {UPDATE_USER_BALANCE, SET_USERS_LIST} from './const';
+import {
+  UPDATE_USER_BALANCE,
+  SET_USERS_LIST,
+  SET_INITIAL_TRANSACTION_DATA,
+} from './const';
 
 export const getFilteredUsersList = (token, setIsListVisible, filter) => {
   const params = {
@@ -64,3 +68,7 @@ export const createTransaction = (token, recipientName, amount, setIsLoading) =>
       })
   );
 };
+
+export const updateInitialTransactionData = (paymentRecipient, amountToTransfer) => (
+  dispatch => dispatch({type: SET_INITIAL_TRANSACTION_DATA, paymentRecipient, amountToTransfer})
+);

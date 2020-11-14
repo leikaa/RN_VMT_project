@@ -1,16 +1,34 @@
 import React from 'react';
 import {
+  Alert,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
+import {useDispatch} from 'react-redux';
 
 import {THEME} from '../../theme';
+import RepeatIcon from '../Common/Icons/RepeatIcon';
+import Strings from '../../utils/strings';
+import {updateInitialTransactionData} from '../../store/actions/main';
+import {useNavigation} from 'react-navigation-hooks';
 
 const HistoryItem = ({item}) => {
-  const onItemClickHandler = () => {
-    console.log('history item clicked', item.id);
+  const dispatch = useDispatch();
+  const {navigate} = useNavigation();
+
+  const onRepeatTransactionClickHandler = () => {
+    Alert.alert('Copy transaction data', Strings.user_repeat_transaction_question,
+      [
+        {
+          text: 'OK', onPress: () => {
+            dispatch(updateInitialTransactionData(item.username, isCreditTransaction(item.amount) ? item.amount.toString() : item.amount.toString().substring(1)));
+            navigate('MainScreen');
+          },
+        },
+        {text: 'CANCEL', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+      ], {cancelable: false});
   };
 
   const isCreditTransaction = (transactionAmount) => {
@@ -23,14 +41,13 @@ const HistoryItem = ({item}) => {
   };
 
   return (
-    <TouchableOpacity
-      onPress={onItemClickHandler}
-      activeOpacity={1}
-      style={styles.history_container}
-    >
+    <View style={styles.history_container}>
       <View style={styles.history_header_section}>
         <View style={styles.history_header_item}>
           <Text style={styles.history_header_text}>{item.date}</Text>
+          <TouchableOpacity onPress={onRepeatTransactionClickHandler}>
+            <RepeatIcon color={THEME.MAIN_COLOR}/>
+          </TouchableOpacity>
         </View>
         <View style={styles.history_header_item}>
           <View style={styles.history_header_correspondent}>
@@ -52,7 +69,7 @@ const HistoryItem = ({item}) => {
         <Text style={styles.history_header_text}>Resulting balance</Text>
         <Text style={[styles.history_header_text]}>{item.balance}</Text>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
