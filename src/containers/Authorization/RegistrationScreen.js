@@ -5,18 +5,23 @@ import {
   Dimensions,
   ScrollView,
   SafeAreaView,
+  Keyboard,
 } from 'react-native';
+import {useNavigation} from 'react-navigation-hooks';
+import {useDispatch} from 'react-redux';
 
 import TextInput from '../../components/Common/CommonTextInput';
 import {isEmailValid} from '../../helpers/IsEmailValid';
 import {isNameValid} from '../../helpers/isNameValid';
 import SubmitButton from '../../components/Common/CommonButton';
-import {useNavigation} from 'react-navigation-hooks';
+
+import {registerUser} from '../../store/actions/registration';
 
 const window = Dimensions.get('window');
 
 const RegistrationScreen = () => {
   const {navigate} = useNavigation();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [isEmailNotValid, setIsEmailNotValid] = useState(false);
   const [name, setName] = useState('');
@@ -28,27 +33,30 @@ const RegistrationScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmitHandler = () => {
+    let error = false;
+
     if (!isEmailValid(email)) {
       setIsEmailNotValid(true);
+      error = true;
     }
     if (!isNameValid(name)) {
       setIsNameNotValid(true);
+      error = true;
     }
     if (password.length === 0) {
       setIsPasswordNotEmpty(true);
+      error = true;
     }
     if (password !== repeatedPassword) {
       setIsPasswordNotTheSame(true);
+      error = true;
     }
-    if (isEmailNotValid || isNameNotValid || isPasswordNotEmpty || isPasswordNotTheSame) {
-      return;
+    if (error) {
+      return Keyboard.dismiss();
     }
 
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      navigate('Authorized');
-    }, 1500);
+    dispatch(registerUser(name, password, email, navigate, setIsLoading));
   };
 
   return (
