@@ -27,7 +27,8 @@
     "react-navigation-tabs": "^2.10.1",
     "react-native-svg": "^12.1.0",
     "react-native-indicators": "^0.17.0",
-    "axios": "^0.21.0"
+    "axios": "^0.21.0",
+    "qs": "^6.9.4"
   },
   "devDependencies": {
     "@babel/core": "7.12.3",

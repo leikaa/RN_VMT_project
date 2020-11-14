@@ -9,6 +9,7 @@ import {
   Keyboard,
   ScrollView,
 } from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
 
 import {THEME} from '../theme';
 import Header from '../components/Common/Header/Header';
@@ -17,11 +18,14 @@ import CustomTextInput from '../components/Common/CommonTextInput';
 import SubmitButton from '../components/Common/CommonButton';
 import {isNameValid} from '../helpers/isNameValid';
 import {getCorrectAmount} from '../helpers/getCorrectAmount';
+import {createTransaction} from '../store/actions/main';
+
 import {mockUsersList} from '../mock';
 
 const window = Dimensions.get('window');
 
 const MainScreen = () => {
+  const dispatch = useDispatch();
   const [userToFind, setUserToFind] = useState('');
   const [usersList, setUsersList] = useState(mockUsersList);
   const [userListVisibility, setUserListVisibility] = useState(false);
@@ -29,6 +33,9 @@ const MainScreen = () => {
   const [isAmountToTransferNotValid, setIsAmountToTransferNotValid] = useState(false);
   const [isNameNotValid, setIsNameNotValid] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const token = useSelector(state => state.Authorization.token);
+
   // seems api already filters initial user list
   const [filteredUserData, setFilteredUserData] = useState('');
 
@@ -40,7 +47,7 @@ const MainScreen = () => {
 
   const onSubmitHandler = () => {
     if (!isNameValid(userToFind)) {
-      setIsNameNotValid(true);
+      // setIsNameNotValid(true);
     }
 
     if (+amountToTransfer <= 0) {
@@ -49,13 +56,11 @@ const MainScreen = () => {
     //todo get total amount and check if it's less than amount to transfer
 
     if (isAmountToTransferNotValid || isNameNotValid) {
-      return;
+      return; // add error
     }
     setIsLoading(true);
 
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
+    dispatch(createTransaction(token, userToFind, amountToTransfer, setIsLoading));
   };
 
   return (
