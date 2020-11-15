@@ -6,20 +6,22 @@ import {
   Dimensions,
 } from 'react-native';
 import {useNavigation} from 'react-navigation-hooks';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 import ProfileItem from '../components/Common/ProfileItem';
 import SubmitButton from '../components/Common/CommonButton';
+import {clearAllData} from '../store/actions/main';
 
 const window = Dimensions.get('window');
 
 const ProfileScreen = () => {
   const {navigate} = useNavigation();
+  const dispatch = useDispatch();
   const name = useSelector(state => state.Profile.username);
   const email = useSelector(state => state.Profile.email);
 
   const onSubmitHandler = () => {
-    //todo clear data
+    dispatch(clearAllData());
     navigate('Login');
   };
 

@@ -5,7 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  SafeAreaView,
+  SafeAreaView, Alert,
 } from 'react-native';
 import {useNavigation} from 'react-navigation-hooks';
 import {useDispatch} from 'react-redux';
@@ -14,6 +14,7 @@ import {THEME} from '../../theme';
 import InputField from '../../components/AuthorizationScreen/InputField/AuthInputField';
 import SubmitButton from '../../components/Common/CommonButton';
 import {authorizeUser} from '../../store/actions/authorization';
+import Strings from '../../utils/strings';
 
 const window = Dimensions.get('window');
 
@@ -22,10 +23,15 @@ const AuthorizationScreen = () => {
   const dispatch = useDispatch();
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
-  const [isMasked, setIsMasked] = useState(false);
+  const [isMasked, setIsMasked] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmitHandler = () => {
+    if (login.length <= 0 || password.length <= 0) {
+      return Alert.alert('An error occurred', Strings.empty_data_login_screen_submit,
+        [{text: 'ОК', onPress: () => console.log('Cancel Pressed'), style: 'cancel'}], {cancelable: false});
+    }
+
     setIsLoading(true);
     dispatch(authorizeUser(login, password, navigate, setIsLoading));
   };

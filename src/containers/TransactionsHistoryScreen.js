@@ -33,9 +33,9 @@ const TransactionsHistoryScreen = () => {
 
   const sortData = (data, orderDesc) => {
     if (orderDesc) {
-      data.sort((a, b) => new moment(b.date).format('YYYYMMDDHmmss') - new moment(a.date).format('YYYYMMDDHmmss'));
+      data.sort((a, b) => moment(new Date(b.date)).format('YYYYMMDDHmmss') - moment(new Date(a.date)).format('YYYYMMDDHmmss'));
     } else {
-      data.sort((a, b) => new moment(a.date).format('YYYYMMDDHmmss') - new moment(b.date).format('YYYYMMDDHmmss'));
+      data.sort((a, b) => moment(new Date(a.date)).format('YYYYMMDDHmmss') - moment(new Date(b.date)).format('YYYYMMDDHmmss'));
     }
 
     return data;

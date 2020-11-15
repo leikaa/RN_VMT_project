@@ -18,6 +18,13 @@ export function Profile(state = initialState, payload) {
         ...state,
         balance: payload.balance,
       };
+    case 'CLEAR_ALL_DATA':
+      return {
+        ...state,
+        username: '',
+        email: '',
+        balance: '',
+      };
     default:
       return state;
   }

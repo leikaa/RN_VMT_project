@@ -9,6 +9,11 @@ export function History(state = initialState, payload) {
         ...state,
         transactionsHistory: payload.transactionsHistory,
       };
+    case 'CLEAR_ALL_DATA':
+      return {
+        ...state,
+        transactionsHistory: [],
+      };
     default:
       return state;
   }

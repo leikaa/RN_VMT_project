@@ -9,6 +9,11 @@ export function Authorization(state = initialState, payload) {
         ...state,
         token: payload.token,
       };
+    case 'CLEAR_ALL_DATA':
+      return {
+        ...state,
+        token: '',
+      };
     default:
       return state;
   }

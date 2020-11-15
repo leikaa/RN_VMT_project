@@ -17,6 +17,13 @@ export function Main(state = initialState, payload) {
         paymentRecipient: payload.paymentRecipient,
         amountToTransfer: payload.amountToTransfer,
       };
+    case 'CLEAR_ALL_DATA':
+      return {
+        ...state,
+        usersList: [],
+        paymentRecipient: '',
+        amountToTransfer: '',
+      };
     default:
       return state;
   }

@@ -40,7 +40,7 @@ const MainScreen = () => {
   useEffect(() => {
     setUserToFind(initialPaymentRecipient);
     setAmountToTransfer(initialAmountToTransfer);
-  }, [initialPaymentRecipient, initialAmountToTransfer]);
+  }, [initialPaymentRecipient, initialAmountToTransfer, balance]);
 
   const onListItemClickHandler = (user) => {
     Keyboard.dismiss();
@@ -66,6 +66,7 @@ const MainScreen = () => {
     }
 
     setIsLoading(true);
+    Keyboard.dismiss();
     dispatch(createTransaction(token, userToFind, amountToTransfer, setIsLoading));
     dispatch(updateInitialTransactionData('', ''));
   };

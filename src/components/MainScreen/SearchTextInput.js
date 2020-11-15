@@ -38,7 +38,7 @@ const SearchTextInput = ({userToFind, setUserToFind, setUserListVisibility, isEr
     <View style={styles.searchbar_wrapper}>
       <View style={styles.searchbar_container}>
         <Text
-          style={styles.searchbar_title}
+          style={[styles.searchbar_title, isError && {color: THEME.WARNING_COLOR}]}
           onPress={() => focusOnElement.current.focus()}
         >
           {'Select a payment recipient'}

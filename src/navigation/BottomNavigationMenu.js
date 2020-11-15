@@ -25,7 +25,7 @@ const BottomNavigationMenu = createBottomTabNavigator({
           return icon;
         },
         tabBarLabel: ({focused}) => {
-          if (focused) {
+          if (!focused) {
             return (
               <View style={styles.navigation_label}>
                 <Text style={styles.navigation_text}>Main</Text>
@@ -48,7 +48,7 @@ const BottomNavigationMenu = createBottomTabNavigator({
           return icon;
         },
         tabBarLabel: ({focused}) => {
-          if (focused) {
+          if (!focused) {
             return (
               <View style={styles.navigation_label}>
                 <Text style={styles.navigation_text}>History</Text>
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   navigation_text: {
     fontSize: 12,
     fontWeight: '400',
-    color: '#04a1d6',
+    color: THEME.DISABLED_COLOR,
   },
 });
 

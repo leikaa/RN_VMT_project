@@ -55,6 +55,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: THEME.DISABLED_COLOR,
     paddingBottom: 10,
+    maxHeight: 146,
+    overflow: 'hidden',
+    backgroundColor: '#fff',
   },
   title_container: {
     minHeight: 56,

@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     backgroundColor: '#fff',
+    paddingLeft: 5
   },
   item_sort_block_text: {
     marginRight: 5,

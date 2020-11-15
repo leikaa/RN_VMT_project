@@ -7,6 +7,7 @@ import {
   UPDATE_USER_BALANCE,
   SET_USERS_LIST,
   SET_INITIAL_TRANSACTION_DATA,
+  CLEAR_ALL_DATA
 } from './const';
 
 export const getFilteredUsersList = (token, setIsListVisible, filter) => {
@@ -71,4 +72,8 @@ export const createTransaction = (token, recipientName, amount, setIsLoading) =>
 
 export const updateInitialTransactionData = (paymentRecipient, amountToTransfer) => (
   dispatch => dispatch({type: SET_INITIAL_TRANSACTION_DATA, paymentRecipient, amountToTransfer})
+);
+
+export const clearAllData = () => (
+  dispatch => dispatch({type: CLEAR_ALL_DATA})
 );
