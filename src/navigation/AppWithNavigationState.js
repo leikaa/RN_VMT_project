@@ -9,7 +9,7 @@ import {
 const AppWithNavigationState = () => {
   return (
     <View style={styles.safe_area}>
-      <StatusBar barStyle='light-content'/>
+      <StatusBar barStyle='dark-content'/>
       <AppNavigation/>
     </View>
   );

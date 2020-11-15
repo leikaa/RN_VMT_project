@@ -85,10 +85,10 @@ const TransactionsHistoryScreen = () => {
                   )}
                   keyExtractor={item => item.id.toString()}
 
-                  initialNumToRender={10}
+                  initialNumToRender={5}
                   updateCellsBatchingPeriod={50}
-                  maxToRenderPerBatch={10}
-                  windowSize={16}
+                  maxToRenderPerBatch={5}
+                  windowSize={11}
                 />
               </View>
               :
