@@ -17,16 +17,14 @@ export const registerUser = (username, password, email, navigate, setIsLoading) 
   })
     .then(response => {
       setIsLoading(false);
-      if (response.status >= 200 && response.status < 300) {
-        dispatch({type: SET_USER_AUTHORIZATION_DATA, token: response.data.id_token});
-        dispatch({type: SET_USER_DATA, username, email, balance: 500});
-        navigate('Authorized');
-      }
+      dispatch({type: SET_USER_AUTHORIZATION_DATA, token: response.data.id_token});
+      dispatch({type: SET_USER_DATA, username, email, balance: 500});
+      navigate('Authorized');
     })
     .catch(error => {
       console.log('user registration error', error);
 
-      ErrorsHandler(error, Strings.user_registration_error);
+      ErrorsHandler(error, 'An error occurred during user registration.');
       setIsLoading(false);
     })
 );

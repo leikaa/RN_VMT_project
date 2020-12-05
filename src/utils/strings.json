@@ -1,13 +1,3 @@
 {
-  "base_url": "http://193.124.114.46:3001/",
-  "server_not_available": "Server connection error, please try again later.",
-  "user_registration_error": "An error occurred during user registration.",
-  "user_authorization_error": "An error occurred during user authorization.",
-  "user_get_info_error": "An error occurred when requesting user information.",
-  "users_filtered_list_error": "An error occurred when requesting users list.",
-  "user_create_transaction_error": "An error occurred while attempting to perform the transaction.",
-  "user_transactions_history_error": "An error occurred when requesting user transactions history.",
-  "user_repeat_transaction_question": "Do you want to use this transaction as a template for a new transfer?",
-  "placeholder_search_filter_item": "Correspondent Name",
-  "empty_data_login_screen_submit": "You must enter your email address and password."
+  "base_url": "http://193.124.114.46:3001/"
 }

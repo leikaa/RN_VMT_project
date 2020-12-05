@@ -7,7 +7,7 @@ import {
   UPDATE_USER_BALANCE,
   SET_USERS_LIST,
   SET_INITIAL_TRANSACTION_DATA,
-  CLEAR_ALL_DATA
+  CLEAR_ALL_DATA,
 } from './const';
 
 export const getFilteredUsersList = (token, setIsListVisible, filter) => {
@@ -26,15 +26,13 @@ export const getFilteredUsersList = (token, setIsListVisible, filter) => {
       data: qs.stringify(params),
     })
       .then(response => {
-        if (response.status >= 200 && response.status < 300) {
-          dispatch({type: SET_USERS_LIST, usersList: response.data});
-          setIsListVisible(true);
-        }
+        dispatch({type: SET_USERS_LIST, usersList: response.data});
+        setIsListVisible(true);
       })
       .catch(error => {
         console.log('get users filtered list error', error);
 
-        ErrorsHandler(error, Strings.users_filtered_list_error);
+        ErrorsHandler(error, 'An error occurred when requesting users list.');
       })
   );
 };
@@ -57,14 +55,12 @@ export const createTransaction = (token, recipientName, amount, setIsLoading) =>
     })
       .then(response => {
         setIsLoading(false);
-        if (response.status >= 200 && response.status < 300) {
-          dispatch({type: UPDATE_USER_BALANCE, balance: response.data.trans_token.balance});
-        }
+        dispatch({type: UPDATE_USER_BALANCE, balance: response.data.trans_token.balance});
       })
       .catch(error => {
         console.log('user create transaction error', error);
 
-        ErrorsHandler(error, Strings.user_create_transaction_error);
+        ErrorsHandler(error, 'An error occurred while attempting to perform the transaction.');
         setIsLoading(false);
       })
   );

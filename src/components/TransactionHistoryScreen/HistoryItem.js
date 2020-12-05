@@ -10,7 +10,6 @@ import {useDispatch} from 'react-redux';
 
 import {THEME} from '../../theme';
 import RepeatIcon from '../Common/Icons/RepeatIcon';
-import Strings from '../../utils/strings';
 import {updateInitialTransactionData} from '../../store/actions/main';
 import {useNavigation} from 'react-navigation-hooks';
 
@@ -19,7 +18,7 @@ const HistoryItem = ({item}) => {
   const {navigate} = useNavigation();
 
   const onRepeatTransactionClickHandler = () => {
-    Alert.alert('Copy transaction data', Strings.user_repeat_transaction_question,
+    Alert.alert('Copy transaction data', 'Do you want to use this transaction as a template for a new transfer?',
       [
         {
           text: 'OK', onPress: () => {

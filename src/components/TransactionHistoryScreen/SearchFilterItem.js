@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import ArrowDownIcon from '../Common/Icons/ArrowDownIcon';
 import React from 'react';
-import Strings from '../../utils/strings';
 import {THEME} from '../../theme';
 
 const window = Dimensions.get('window');
@@ -29,7 +28,7 @@ const SearchFilterItem = ({onPressSortItem, isOrderDesc, searchValue, setSearchV
       style={styles.item_filter_input}
       onChangeText={text => setSearchValue(text)}
       placeholderTextColor={THEME.DISABLED_COLOR}
-      placeholder={Strings.placeholder_search_filter_item}
+      placeholder={'Correspondent Name'}
       value={searchValue}
     />
   </View>
@@ -52,7 +51,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
     backgroundColor: '#fff',
-    paddingLeft: 5
+    paddingLeft: 5,
   },
   item_sort_block_text: {
     marginRight: 5,

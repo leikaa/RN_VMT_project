@@ -15,20 +15,18 @@ export const userInfo = (token, navigate, setIsLoading) => (
   })
     .then(response => {
       setIsLoading(false);
-      if (response.status >= 200 && response.status < 300) {
-        dispatch({
-          type: SET_USER_DATA,
-          username: response.data.user_info_token.name,
-          email: response.data.user_info_token.email,
-          balance: response.data.user_info_token.balance,
-        });
-        navigate('Authorized');
-      }
+      dispatch({
+        type: SET_USER_DATA,
+        username: response.data.user_info_token.name,
+        email: response.data.user_info_token.email,
+        balance: response.data.user_info_token.balance,
+      });
+      navigate('Authorized');
     })
     .catch(error => {
       console.log('user get info error', error);
 
-      ErrorsHandler(error, Strings.user_get_info_error);
+      ErrorsHandler(error, 'An error occurred when requesting user information.');
       setIsLoading(false);
     })
 );

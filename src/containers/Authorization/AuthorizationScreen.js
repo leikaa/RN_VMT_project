@@ -14,7 +14,7 @@ import {THEME} from '../../theme';
 import InputField from '../../components/AuthorizationScreen/InputField/AuthInputField';
 import SubmitButton from '../../components/Common/CommonButton';
 import {authorizeUser} from '../../store/actions/authorization';
-import Strings from '../../utils/strings';
+import {isEmailValid} from '../../helpers/IsEmailValid';
 
 const window = Dimensions.get('window');
 
@@ -27,8 +27,18 @@ const AuthorizationScreen = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmitHandler = () => {
-    if (login.length <= 0 || password.length <= 0) {
-      return Alert.alert('An error occurred', Strings.empty_data_login_screen_submit,
+    if (login.length <= 0 && password.length <= 0) {
+      return Alert.alert('An error occurred', 'You must enter your email address and password.',
+        [{text: 'ОК', onPress: () => console.log('Cancel Pressed'), style: 'cancel'}], {cancelable: false});
+    }
+
+    if (!isEmailValid(login)) {
+      return Alert.alert('An error occurred', 'Invalid email.',
+        [{text: 'ОК', onPress: () => console.log('Cancel Pressed'), style: 'cancel'}], {cancelable: false});
+    }
+
+    if (password.length <= 0) {
+      return Alert.alert('An error occurred', 'You must specify your password.',
         [{text: 'ОК', onPress: () => console.log('Cancel Pressed'), style: 'cancel'}], {cancelable: false});
     }
 

@@ -14,15 +14,13 @@ export const getTransactionsHistory = (token, setIsLoading) => (
     },
   })
     .then(response => {
-      if (response.status >= 200 && response.status < 300) {
-        dispatch({type: SET_USER_TRANSACTIONS_HISTORY, transactionsHistory: response.data.trans_token});
-      }
+      dispatch({type: SET_USER_TRANSACTIONS_HISTORY, transactionsHistory: response.data.trans_token});
       setIsLoading(false);
     })
     .catch(error => {
       console.log('get user transactions history error', error);
 
-      ErrorsHandler(error, Strings.user_transactions_history_error);
+      ErrorsHandler(error, 'An error occurred when requesting user transactions history.');
       setIsLoading(false);
     })
 );

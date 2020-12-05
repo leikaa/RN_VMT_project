@@ -1,9 +1,8 @@
 import {Alert} from 'react-native';
-import Strings from '../utils/strings';
 
 const ErrorsHandler = (er, message) => {
   if (!er.response) {
-    Alert.alert('Connection error', Strings.server_not_available,
+    Alert.alert('Connection error', 'Server connection error, please try again later.',
       [{text: 'ОК', onPress: () => console.log('Cancel Pressed'), style: 'cancel'}], {cancelable: false});
     return;
   }
